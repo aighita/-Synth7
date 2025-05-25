@@ -2,6 +2,8 @@
 #include "Sequencer.h"
 #include <Arduino.h>
 
+extern volatile float currentFreq;
+
 // C Minor Base
 const int Sequencer::degreeFreqs[7] = {
   262, // I  – C4
@@ -13,8 +15,10 @@ const int Sequencer::degreeFreqs[7] = {
   466  // VII – Bb4
 };
 
-Sequencer::Sequencer(uint8_t audioPin, uint8_t ledPin)
+Sequencer::Sequencer(uint8_t audioPin, uint8_t dacPin1, uint8_t dacPin2, uint8_t ledPin)
   : audioPin_(audioPin)
+  , dacPin1_(dacPin1)
+  , dacPin2_(dacPin2)
   , ledPin_(ledPin)
   , patternLength_(16)
   , bpm_(130)
@@ -63,6 +67,9 @@ void Sequencer::introSong() const {
 void Sequencer::begin() {
   pinMode(audioPin_, OUTPUT);
   pinMode(ledPin_, OUTPUT);
+
+  dacWrite(dacPin1_, 0);
+  dacWrite(dacPin2_, 0);
 }
 
 void Sequencer::toggleMetronome() {
@@ -146,9 +153,31 @@ void Sequencer::update() {
   if (freq > 0) {
     // tone(audioPin_, transpose(transposeOctave(freq)), stepLengthMs_);
     tone(audioPin_, transpose(transposeOctave(freq)));
+    // tone(audioPin_, transpose(transposeOctave(freq)));
+    // uint8_t cv = map(transpose(transposeOctave(freq)),
+    //                  degreeFreqs[0],   // 262 Hz
+    //                  degreeFreqs[6],   // 466 Hz
+    //                  0, 255);
+    
+    // // // 2) send CV out on DAC1 (GPIO25)
+    // // dacWrite(dacPin1_, cv);
+
+    // // // 3) send gate high on DAC2 (GPIO26)
+    // // dacWrite(dacPin2_, 255);
+
+    // int playFreq = transpose(transposeOctave(freq));
+    // currentFreq  = (float)playFreq;
+
     digitalWrite(ledPin_, HIGH);
   } else {
     noTone(audioPin_);
+
+    // // no note: gate low, CV zero
+    // dacWrite(dacPin2_, 0);
+    // // (optional) leave CV at last value or zero it too:
+    // dacWrite(dacPin1_, 0);
+    // currentFreq = 0.0f;
+
     digitalWrite(ledPin_, LOW);
   }
 

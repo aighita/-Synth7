@@ -8,7 +8,7 @@
 
 class Sequencer {
   public:
-    Sequencer(uint8_t audioPin, uint8_t ledPin);
+    Sequencer(uint8_t audioPin, uint8_t dacPin1, uint8_t dacPin2, uint8_t ledPin);
     void begin();
     void update();
     void toggle();
@@ -50,6 +50,8 @@ class Sequencer {
 
     uint8_t       audioPin_;
     uint8_t       ledPin_;
+    uint8_t       dacPin1_;
+    uint8_t       dacPin2_;
     int           pattern_[MAX_STEPS];
     int           patternLength_;
     int           bpm_;
