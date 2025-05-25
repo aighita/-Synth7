@@ -24,6 +24,7 @@
 ## 🔌 Wiring
 
 | COMPONENT             | ESP32 PIN                    |
+|-----------------------|------------------------------|
 | Butoane Note (C)      | GPIO 4/5/13/14/27/32/33      |
 | Buton Opțiuni         | GPIO 19                      |
 | Joystick X/Y          | GPIO 34/35                   |
