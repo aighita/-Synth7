@@ -6,7 +6,7 @@
 
 ## 🔧 Features
 
-- **7 capacitive touch buttons**: Correspond to musical notes in a Nashville number system key.
+- **7 tactile switch buttons**: Correspond to musical notes in a Nashville number system key.
 - **Analog joystick**: Transpose octave.
 - **PWM buzzer**: For generating audio output.
 - **16x2 I2C LCD display**: Provides real-time feedback on mode and parameters.
