@@ -2,7 +2,7 @@
   <h1>🎹 µSynth7</h1>
 </div>
 
-    **µSynth7** is a compact digital synthesizer built around an ESP32 microcontroller. The project offers an intuitive interface for playing musical notes and includes a sequencer for automated playback. It's ideal for musical experimentation and educational purposes.
+**µSynth7** is a compact digital synthesizer built around an ESP32 microcontroller. The project offers an intuitive interface for playing musical notes and includes a sequencer for automated playback. It's ideal for musical experimentation and educational purposes.
 
 ## 🔧 Features
 
